@@ -106,47 +106,16 @@
 				body: '',
 				version:this.version,
 				fromid:0,
-				rule_name:this.rule_name,
-				rule_url:this.rule_url,
-				private_rule_name:this.private_rule_name,
-				private_rule_url:this.private_rule_url,
-				can_edit_contact:this.can_edit_contact,
 				isguest:this.isguest,
 				authorize:this.authorize,
-				show_more:this.show_more,
-				show_link:this.show_link,
-				show_secret:this.show_secret,
-				show_linkman:this.show_linkman,
-				show_wechat:this.show_wechat,
-				show_mobile:this.show_mobile,
-				show_bio:this.show_bio,
-				show_video:this.show_video,
-				link_label:this.link_label,
-				secret_label:this.secret_label,
-				video_label:this.video_label,
-				guide_post_title:this.guide_post_title,
-				guide_post_subtitle:this.guide_post_subtitle,
-				guide_post_poster:this.guide_post_poster,
 				upload_api: this.uploadApi,
-				notices:this.notices,
 				categories:this.categories,
-				poster_height:this.poster_height,
 				bgcolor:this.bgcolor,
 				topiccolor:this.topiccolor,
-				show_service_btn:this.show_service_btn,
-				create_title:this.create_title,
 			};
 		},
 		methods: {
-			showMoreOption(){
-				this.show_more_box = !this.show_more_box
-			},
-			hideedituser(){
-				this.edituser = 0
-			},
-			showedituser(){
-				this.edituser = 1
-			},
+			
 			
 			updategueststatus(){
 				this.isguest = Vue.prototype.isguest
@@ -227,8 +196,12 @@
 					uni.showToast({ title: graceChecker.error, icon: "none" });
 					return 
 				}
-				
+				uni.showLoading({
+					title:'提交中'
+				});
 				let data = await api.UpdatePostData(e.detail.value)
+				uni.hideLoading()
+				
 				
 				// cateid
 				if(data.err){
@@ -253,9 +226,8 @@
 			
 			this.cateid =  this.post.category_id
 			this.body =  this.post.body
-			this.link =  this.post.link
-			this.secret =  this.post.secret
 			this.images =  this.post.images
+			this.video =  this.post.video
 			
 			
 			if(p.cateid){
@@ -264,31 +236,13 @@
 			if(this.categories.length == 0){
 				this.categories = await api.GetCategories()
 				Vue.prototype.categories = this.categories
-				this.notices = Vue.prototype.notices
 				this.isguest = Vue.prototype.isguest
 				this.authorize = Vue.prototype.authorize
-				this.rule_name = Vue.prototype.rule_name
-				this.rule_url = Vue.prototype.rule_url
-				this.private_rule_name = Vue.prototype.private_rule_name
-				this.private_rule_url = Vue.prototype.private_rule_url
-				this.show_more = Vue.prototype.show_more
-				this.show_link = Vue.prototype.show_link
-				this.show_secret = Vue.prototype.show_secret
-				this.show_linkman = Vue.prototype.show_linkman
-				this.show_wechat = Vue.prototype.show_wechat
-				this.show_mobile = Vue.prototype.show_mobile
-				this.show_bio = Vue.prototype.show_bio
-				this.link_label = Vue.prototype.link_label
-				this.secret_label = Vue.prototype.secret_label
 				this.bgcolor = Vue.prototype.bgcolor
 				this.topiccolor = Vue.prototype.topiccolor
 				this.show_service_btn = Vue.prototype.show_service_btn
 				this.create_title = Vue.prototype.create_title
 				this.upload_api = Vue.prototype.uploadApi
-				
-				this.guide_post_title = Vue.prototype.guide_post_title
-				this.guide_post_subtitle = Vue.prototype.guide_post_subtitle
-				this.guide_post_poster = Vue.prototype.guide_post_poster
 			}
 			if( this.isguest ){ //回调登录
 				uni.$once('updategueststatus',this.updategueststatus)

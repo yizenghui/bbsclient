@@ -13,8 +13,10 @@
 			"style": {}
 		},
 		{
-			"path": "pages/user/posts",
-			"style": {}
+			"path": "pages/user/posts"
+			,"style": {
+			    "enablePullDownRefresh": true
+			}
 		},
 		{
 			"path": "pages/post/info"

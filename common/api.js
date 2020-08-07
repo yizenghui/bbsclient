@@ -143,6 +143,13 @@ export default class comm extends base {
 	}
 	
 	/**
+	 * 获取最近更新内容
+	 */
+	static async GetUserPosts(page, limit) {
+		const url = `${this.baseUrl}/user/posts`;
+		return await this.get(url, {page:page, limit:limit,version:Vue.prototype.version});
+	}
+	/**
 	 * 获取cash
 	 */
 	static async GetCashs() {

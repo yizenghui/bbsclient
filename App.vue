@@ -55,52 +55,6 @@
 			Vue.prototype.uploadApi = config.upload_api
 			Vue.prototype.categories = []
 			Vue.prototype.tips_login = '请登录';
-			Vue.prototype.login_poster = '';
-			Vue.prototype.rule_name = '';
-			Vue.prototype.rule_url = '';
-			Vue.prototype.private_rule_name = '';
-			Vue.prototype.private_rule_url = '';
-			Vue.prototype.can_edit_contact = '';
-			Vue.prototype.contact_guide_poster = '';
-			Vue.prototype.wechat_guide_poster = '';
-			Vue.prototype.support_poster = '';
-			Vue.prototype.create_title = '发布';
-			Vue.prototype.share_title = ''; //强制分享标题
-			Vue.prototype.share_cover = ''; //强制分享封面图
-			
-			Vue.prototype.show_author_card = 0; //显示作者卡片
-			Vue.prototype.show_add_btn = 0; //展示发布按钮
-			Vue.prototype.show_service_btn = 0; //展示客服按钮
-			Vue.prototype.show_more = 0;
-			Vue.prototype.show_link = 0;
-			Vue.prototype.show_secret = 0;
-			Vue.prototype.show_linkman = 0;
-			Vue.prototype.show_wechat = 0;
-			Vue.prototype.show_mobile = 0;
-			Vue.prototype.show_bio = 0;
-			Vue.prototype.show_video = 0;
-			Vue.prototype.integral_rule = '好友注册、下载图片时，你会获得积分。';
-			Vue.prototype.link_label = '外链';
-			Vue.prototype.secret_label = '密令';
-			Vue.prototype.video_label = '视频';
-			Vue.prototype.guide_post_title = '';
-			Vue.prototype.guide_post_subtitle = '';
-			Vue.prototype.guide_post_poster = '';
-			Vue.prototype.poster_height = ''; // 控制所有海报高度
-			
-			Vue.prototype.show_support = true; //支持技术支持
-			
-			Vue.prototype.video_adlt = 10;
-			Vue.prototype.video_adlm = 2;
-			Vue.prototype.grid_adlt = 10;
-			Vue.prototype.grid_adlm = 4;
-			Vue.prototype.banner_adlt = 10;
-			Vue.prototype.banner_adlm = 6;
-			Vue.prototype.screen_adlt = 10;
-			Vue.prototype.screen_adlm = 7;
-			Vue.prototype.can_cash = 0;
-			
-			Vue.prototype.notices = [];
 			
 		}
 

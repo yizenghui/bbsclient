@@ -34,7 +34,7 @@
 				</view>
 			</block>
 		</cu-custom>
-		<notice v-if="notices.length>0" :notices="notices" />
+		
 		<scroll-view  v-if="categories.length>1" scroll-x class="bg-white nav solids-bottom">
 			<view class="flex text-center">
 				<view  v-for="(item,index) in categories" :key="index" class="cu-item flex-sub" :class="item.id==cateid?'text-'+topiccolor+' cur':''">
@@ -153,20 +153,12 @@
 				isload:0,
 				nomore:0,
 				cateid:0,
-				showreportbox:0,
-				reportid:0,
-				reporttype:'post',
 				searchInput:'',
 				list:[],
 				showSearchBox:false,
 				page:1,
 				limit:20,
 				orderby:'id',
-				show_author_card:this.show_author_card,
-				grid_adid:this.grid_adid,
-				banner_adid:this.banner_adid,
-				video_adid:this.video_adid,
-				screen_adid:this.screen_adid,
 				fromid:this.fromid,
 				isguest:this.isguest,
 				authorize:this.authorize,
@@ -251,8 +243,16 @@
 				});
 			},
 			
+			showSearch(){
+				this.showSearchBox = !this.showSearchBox
+				if(this.showSearchBox){
+					uni.pageScrollTo({
+						scrollTop: 0,
+						duration: 300
+					});
+				}
+			},
 			async formSearchSubmit(e) {
-				
 				this.searchInput  =  e.detail.value.searchInput
 				// console.log(this.searchInput)
 				this.isload = 1
@@ -277,64 +277,13 @@
 			cate(item){
 				this.cateid = item.id
 			},
-			toggleLikePost (item){
-				if(item.userliked){
-				  item.userliked = false
-				  item.liked --
-				  api.UnLikePost(item.id)
-				}else{
-				  item.userliked = true
-				  item.liked ++
-				  api.LikePost(item.id)
-				}
-			},
-			doPostAction(e){
-				var that = this
-				var index = e.currentTarget.dataset.index;
-				var item = that.list[index]
-				let gendername = 'Ta'
-				if(item.user.gender == 1){
-					gendername = '他'
-				}else if(item.user.gender == 2){
-					gendername = '她'
-				}
-				var item_list = []
-				if( item.user.id==that.uid ){
-					item_list =  [  '修改', '删除' ]
-				}
-				
-				uni.showActionSheet({
-				    itemList: item_list, // 功能操作
-				    success: function (res) {
-						if(res.tapIndex==0){
-							uni.navigateTo({
-								url:"/pages/post/update?id="+item.id
-							})
-						}else if(res.tapIndex==1){
-							uni.showModal({
-								title:'提示',
-								content:'确认要删除吗？',
-								success(res2) {
-									if( res2.confirm ){
-										api.DeletePost(item.id)
-										that.list.splice(index,1)
-									}
-								}
-							})
-						}
-				    },
-				    fail: function (res) {
-				        console.log(res.errMsg);
-				    }
-				});
-			},
 			async fetch(cateid,page,searchInput,orderby,limit){
 				return await api.GetPosts(cateid,page,searchInput,orderby,limit)
 			}
 		},
 		
 		onShareAppMessage(e) {
-			let title = Vue.prototype.share_title?Vue.prototype.share_title:'BBS基础框架'
+			let title = Vue.prototype.share_title?Vue.prototype.share_title:'BBS Base'
 			let cover = Vue.prototype.share_cover?Vue.prototype.share_cover:''
 			let page = '/pages/index/index?cateid='+this.cateid+'&fromid='+Vue.prototype.uid
 			
